@@ -1,33 +1,32 @@
-import java.io.FileNotFoundException;
-
 public class DataRunner {
     public static void main(String[] args) {
         // Create a UserStory object with information about the user and purpose
-        UserStory userStory = new UserStory("café manager", "analyze customer purchases", "make better stocking decisions");
-        System.out.println(userStory.toString());
+        System.out.println("User Story:");
+        System.out.println("Role: café manager");
+        System.out.println("Goal: analyze customer purchases");
+        System.out.println("Purpose: make better stocking decisions");
 
-        // Load data from files and analyze the transactions
-        try {
-            // Create a CafeTransactionAnalyzer object by loading data from text files
-            CafeTransactionAnalyzer analyzer = new CafeTransactionAnalyzer("transactionNumbers.txt", "items.txt");
+        // Sample data for transactions and items
+        int[] transactionNumbers = {101, 102, 103, 104, 105};
+        String[] items = {"Coffee", "Tea", "Coffee", "Muffin", "Coffee"};
 
-            // Display the total transactions and unique item count
-            System.out.println(analyzer.toString());
+        // Create a CafeTransactionAnalyzer object with sample data
+        CafeTransactionAnalyzer analyzer = new CafeTransactionAnalyzer(transactionNumbers, items);
 
-            // Show all items sold in the transactions
-            analyzer.showItems();
+        // Display the total transactions
+        System.out.println("\nTotal transactions: " + analyzer.countTransactions());
 
-            // Find and display the most common item sold
-            String mostCommonItem = analyzer.findMostCommonItem();
-            System.out.println("Most common item: " + mostCommonItem);
+        // Show all items sold in the transactions
+        System.out.println("\nItems sold:");
+        analyzer.showItems();
 
-            // Display promotional message if the most common item is Coffee
-            if ("Coffee".equalsIgnoreCase(mostCommonItem)) {
-                System.out.println("Coffee is 25% off for a limited time only!");
-            }
-            
-        } catch (FileNotFoundException e) {
-            System.out.println("Error: " + e.getMessage());
+        // Find and display the most common item sold
+        String mostCommonItem = analyzer.findMostCommonItem();
+        System.out.println("\nMost common item: " + mostCommonItem);
+
+        // Display promotional message if the most common item is Coffee
+        if ("Coffee".equalsIgnoreCase(mostCommonItem)) {
+            System.out.println("\nSpecial Promotion: Coffee is 25% off for a limited time only!");
         }
     }
 }
